@@ -1,0 +1,46 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model Vessel {
+  IMONo      Int           @id
+  Name       String
+  VesselType Int
+  DWT        Float
+
+  Logs       EmissionLog[]
+}
+
+model EmissionLog {
+  EID       Int      @id @default(autoincrement())
+  VesselID  Int
+  FromUTC   DateTime
+  TOUTC     DateTime
+  AERCO2T2W Float
+  TotT2WCO2 Float?
+
+  CreatedAt DateTime @default(now())
+  UpdatedAt DateTime @updatedAt
+
+  vessel    Vessel   @relation(fields: [VesselID], references: [IMONo])
+
+  @@index([VesselID, TOUTC])
+}
+
+model CE_PPSCCReferenceLine {
+  RowID        Int     @id
+  Category     String
+  VesselTypeID Int
+  Size         String
+  Traj         String
+  a            Float
+  b            Float
+  c            Float
+  d            Float
+  e            Float
+}
