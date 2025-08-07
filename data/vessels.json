@@ -1,26 +1,26 @@
 [
   {
-    "Name": "BW KOBE",
+    "Name": "CRIMSON AMBER",
     "IMONo": 9836476,
     "VesselType": 1001,
-    "DWT": 30000
+    "DWT": 81703
   },
   {
     "Name": "BW OSAKA",
     "IMONo": 9836567,
     "VesselType": 1001,
-    "DWT": 20000
+    "DWT": 81796
   },
   {
-    "Name": "WORLD CREST",
+    "Name": "PAN SAPPHIRE",
     "IMONo": 9860386,
     "VesselType": 1001,
-    "DWT": 25000
+    "DWT": 62569
   },
   {
     "Name": "WORLD DIANA",
     "IMONo": 9875214,
     "VesselType": 1001,
-    "DWT": 35000
+    "DWT": 82031
   }
 ]
