@@ -55,6 +55,7 @@ npm i
 
 ```ini
 // replace with actual values
+CORS_ORIGINS=http://your.origin.com
 DB_URL=postgresql://postgres:__password__@__db_host__/__db_name__?schema=__schema__
 ```
 
