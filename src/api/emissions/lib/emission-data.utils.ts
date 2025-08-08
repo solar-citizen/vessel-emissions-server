@@ -1,43 +1,22 @@
 import Decimal from 'decimal.js';
 import { CE_PPSCCReferenceLine, Vessel } from '@prisma/client';
+
 import { calculatePPSCCBaselines } from '#src/shared/calculate-pp-scc-baselines.util';
+import { groupBy } from '#src/shared/group-by.util';
+
 import type { ChartSeries, QuarterlyDeviation, QuarterEndLog } from './types';
 
 /**
  * Groups factors by vessel type ID for efficient lookup
  */
-export function groupFactorsByType(
-  factors: CE_PPSCCReferenceLine[],
-): Map<number, CE_PPSCCReferenceLine[]> {
-  const factorsByType = new Map<number, CE_PPSCCReferenceLine[]>();
-
-  factors.forEach((factor) => {
-    if (!factorsByType.has(factor.VesselTypeID)) {
-      factorsByType.set(factor.VesselTypeID, []);
-    }
-    factorsByType.get(factor.VesselTypeID)!.push(factor);
-  });
-
-  return factorsByType;
-}
+export const groupFactorsByType = (factors: CE_PPSCCReferenceLine[]) =>
+  groupBy(factors, (factor) => factor.VesselTypeID);
 
 /**
  * Groups emission logs by vessel ID
  */
-export function groupLogsByVessel(
-  logs: QuarterEndLog[],
-): Map<number, QuarterEndLog[]> {
-  const logsByVessel = new Map<number, QuarterEndLog[]>();
-
-  logs.forEach((log) => {
-    if (!logsByVessel.has(log.vessel_id)) {
-      logsByVessel.set(log.vessel_id, []);
-    }
-    logsByVessel.get(log.vessel_id)!.push(log);
-  });
-
-  return logsByVessel;
-}
+export const groupLogsByVessel = (logs: QuarterEndLog[]) =>
+  groupBy(logs, (log) => log.vessel_id);
 
 /**
  * Calculates quarterly deviations for a single vessel
